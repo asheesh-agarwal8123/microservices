@@ -2,6 +2,9 @@ package com.asheesh.learning.webservices.restfulwebservices.user;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -9,8 +12,11 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description="This is user object with all its attributes")
+@Entity
 public class User {
 
+	@Id
+	@GeneratedValue
 	@ApiModelProperty(notes="This is system generated unique user id", required=false)
 	private Integer id;
 	
