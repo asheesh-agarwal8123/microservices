@@ -20,7 +20,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.asheesh.learning.webservices.restfulwebservices.user.exception.UserNotFoundException;
 
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.Tag;
 
 @RestController
 public class UserController {
