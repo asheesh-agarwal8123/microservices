@@ -1,35 +1,40 @@
 package com.asheesh.learning.webservices.restfulwebservices.user;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(description="This is user object with all its attributes")
+@ApiModel(description = "This is user object with all its attributes")
 @Entity
 public class User {
 
 	@Id
 	@GeneratedValue
-	@ApiModelProperty(notes="This is system generated unique user id", required=false)
+	@ApiModelProperty(notes = "This is system generated unique user id", required = false)
 	private Integer id;
-	
-	@Size(min=2, message="Name should be atleast 2 characters")
-	@ApiModelProperty(notes="Name should be atleast 2 characters", required=true)
+
+	@Size(min = 2, message = "Name should be atleast 2 characters")
+	@ApiModelProperty(notes = "Name should be atleast 2 characters", required = true)
 	private String name;
-	
-	@Past(message="birthDate should be in past")
-	@ApiModelProperty(notes="birthDate should always be in past", required=true)
+
+	@Past(message = "birthDate should be in past")
+	@ApiModelProperty(notes = "birthDate should always be in past", required = true)
 	private Date birthDate;
 
-	// If not present then Post /Users fail due to unable to map request body
-	// params
+	@OneToMany(mappedBy = "user")
+	private List<Post> posts;
+
+	// If not present then POST /Users request will fail due to unable to map
+	// request body params
 	public User() {
 		super();
 	}
@@ -63,6 +68,14 @@ public class User {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	@Override
